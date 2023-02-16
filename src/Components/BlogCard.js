@@ -1,6 +1,7 @@
 import {FaRegComment} from "react-icons/fa"
 import {Link} from "react-router-dom"
-function BlogCard(){
+ 
+function BlogCard(props){
     return (
     <Link to="/blog">
     <div className="bg-white border rounded-md mb-4">
@@ -17,7 +18,7 @@ function BlogCard(){
                     <small className="text-gray-400">Jan 12</small>
                 </div>
                 <div >
-                    <h3 className="font-bold text-2xl hover:text-sky-600">This is my first blog about APIs and requests and resposnes</h3>
+                    <h3 className="font-bold text-2xl hover:text-sky-600">{props.data.tittle}</h3>
                 </div>
                 <div className="flex items-center space-x-1.5">
                     <FaRegComment size={15} className="text-gray-700"/>

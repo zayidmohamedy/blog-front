@@ -3,23 +3,27 @@ import SideBar from "../Components/SideBar"
 import ListCard from "../Components/ListCard"
 
 import { useEffect,useState } from "react"
+import axios from "axios"
 
 function Home(){
-    const {blogs,setBlogs}= useState([])
+     const [blogs,setBlogs]= useState([])
     useEffect(()=>{
         //fetching
-        fetch(`http://localhost:8000/blog/list`)
-        .then((res)=>{return res.json})
-        .then((data)=>{ console.log(data);})
-        .catch(()=>{ console.log("error");})
+         axios.get(`http://localhost:8000/blog/list`).then((res)=>{
+            setBlogs(res.data.blogs);
+            }).catch((e)=>{ console.log(e);})
+
+        // fetch(`http://localhost:8000/blog/list`)
+        // .then((res)=>{return res.json()})
+        // .then((data)=>{ setBlogs(data.blogs);})
+        // .catch((e)=>{ console.log(e);})
 
     })
     return (
         <div className="flex justify-between space-x-5 mt-5">
            <SideBar/>
             <div className="flex-1">
-                <BlogCard/>
-                <BlogCard/>
+             {blogs.map((blog)=>  <BlogCard data={blog}/> )} 
             </div>
             <div className="basis-1/4">
                 <div className="bg-slate-50 py-2 rounded-md">

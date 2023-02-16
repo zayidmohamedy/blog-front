@@ -8,7 +8,9 @@ import Dashboard from "./Pages/Dashboard";
 import New from "./Pages/New"
 import Profile from "./Pages/Profile"
 import ChangePassword from "./Pages/ChangePassword";
-
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+ 
 
 function App() {
   return (
@@ -28,7 +30,18 @@ function App() {
         </Routes>
         </div>
       </BrowserRouter>
-
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
    </div>
   );
 }
