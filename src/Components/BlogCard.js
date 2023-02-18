@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
  
 function BlogCard(props){
     return (
-    <Link to="/blog">
+    <Link to={`/blog/${props.data._id}`}>
     <div className="bg-white border rounded-md mb-4">
         <div>
             <img className="rounded-t-md" src="https://appmaster.io/api/_files/PqV7MuNwv89GrZvBd4LNNK/download/"/>
@@ -18,7 +18,7 @@ function BlogCard(props){
                     <small className="text-gray-400">Jan 12</small>
                 </div>
                 <div >
-                    <h3 className="font-bold text-2xl hover:text-sky-600">{props.data.tittle}</h3>
+                    <h3 className="font-bold text-2xl hover:text-sky-600">{props.data.title}</h3>
                 </div>
                 <div className="flex items-center space-x-1.5">
                     <FaRegComment size={15} className="text-gray-700"/>

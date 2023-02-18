@@ -1,16 +1,19 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
-
+import { UserContext } from "../Utils/UserContext";
+import { UseContext } from "react"
 function Login(){
     const [inputs,setInputs]= useState({})
-     
+     const {setUser} = useContext(UserContext)
+
     function handleOnSubmit(){
         axios.post(`http://localhost:8000/auth/login`,inputs)
         .then((res)=>{
             // console.log(res.data)
             localStorage.setItem("token",res.data.token)
             toast.success(res.data.message);
+            setUser(true)
             }).catch((e)=>{ toast.error(e.response.data.message);})
     }
 

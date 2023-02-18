@@ -1,7 +1,17 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
 import BlogList from "../Components/BlogList"
+import { UserContext } from "../Utils/UserContext"
+ 
 
 function Dashboard(){
+ const {setUser} = useContext(UserContext)
+ function handleOnSubmit(){
+    // set user to false
+   setUser(false)
+    // remove the local token
+    localStorage.removeItem("token")
+ }
     return(
     <div className="m-auto w-3/5">
         <div className="py-5">
@@ -14,7 +24,7 @@ function Dashboard(){
             <Link to="/change" className="flex-1">
                 <button className="w-full  border border-blue-500 p-3 text-blue-500 rounded-md">Change password</button>
             </Link>
-            <button className="flex-1 border border-blue-500 p-3 text-blue-500 rounded-md">Logout</button>
+            <button className="flex-1 border border-blue-500 p-3 text-blue-500 rounded-md" onClick={handleOnSubmit}>Logout</button>
             
         </div>
         <div className="bg-white p-5 rounded-md">

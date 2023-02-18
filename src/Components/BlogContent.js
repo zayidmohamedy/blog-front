@@ -1,6 +1,7 @@
 import BlogComments from "./BlogComments"
 
-function BlogContent(){
+function BlogContent(props){
+   
     return(
         <div className="flex-1">
         <div className="bg-white rounded-md">
@@ -13,13 +14,13 @@ function BlogContent(){
                      <img className="rounded-full" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"/>
                 </div>
             <div className="leading-4">
-                <h4>Mohamed ahmed</h4>
+                <h4>   {props.blog.user.firstName}</h4>
                 <small className="text-gray-400">Jan 12</small>
             </div>
             </div>
-            <h3 className="font-bold text-5xl hover:text-sky-600">This is my first blog about APIs and requests and responses</h3>
+            <h3 className="font-bold text-5xl hover:text-sky-600">{props.blog.title}</h3>
             <div className="py-10">
-                This is a blog about this and that
+            {props.blog.content}
             </div>
             </div>
             <BlogComments/>

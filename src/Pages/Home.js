@@ -4,8 +4,9 @@ import ListCard from "../Components/ListCard"
 
 import { useEffect,useState } from "react"
 import axios from "axios"
-
+ 
 function Home(){
+  
      const [blogs,setBlogs]= useState([])
     useEffect(()=>{
         //fetching
@@ -13,11 +14,7 @@ function Home(){
             setBlogs(res.data.blogs);
             }).catch((e)=>{ console.log(e);})
 
-        // fetch(`http://localhost:8000/blog/list`)
-        // .then((res)=>{return res.json()})
-        // .then((data)=>{ setBlogs(data.blogs);})
-        // .catch((e)=>{ console.log(e);})
-
+  
     })
     return (
         <div className="flex justify-between space-x-5 mt-5">
