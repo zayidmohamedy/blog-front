@@ -1,10 +1,34 @@
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Utils/UserContext";
-import { useContext } from "react";
-
+import { useContext, useState } from "react";
+import jwt_decode from "jwt-decode"; 
+import axios from "axios";
+ 
 function Header() {
   const { user } = useContext(UserContext);
+ 
+  const token = localStorage.getItem("token")
+ 
+  const [image,setImage] = useState({});
+  
+ 
+    if(user){
+      const id = jwt_decode(token)
+      axios.get(`http://localhost:8000/auth/user/${id.id}`)
+      .then((res)=>{
+       
+       
+        setImage(res.data.user.image.url);
+      
+          }).catch((e)=>{ 
+               console.log(e);
+          })
+    }
+   
+ 
+ 
+ 
   return (
     <div className="flex justify-between bg-white py-4 px-20  border-b-2">
       <div className="flex items-center">
@@ -29,11 +53,20 @@ function Header() {
           </Link>
           <Link to="/dashboard">
             <div className="h-10 w-10 ml-4">
+            {image===undefined ? (
               <img
               alt="profile_image"
                 className="rounded-full"
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
-              />
+                src=  "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"
+              
+                   /> 
+             ):(
+              <img
+              alt="profile_image"
+                className="rounded-full"
+                src= {image}
+                 
+                   />   )}
             </div>
           </Link>
         </div>

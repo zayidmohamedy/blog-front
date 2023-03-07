@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useState ,useEffect } from "react";
  import { UserContext } from "./Utils/UserContext";
 import ProtectRoutes from "./ProtectRoutes";
- 
+ import EditBlog from "./Pages/EditBlog";
 
 
 function App() {
@@ -44,6 +44,7 @@ function App() {
 
           <Route path="/dashboard" element={ <ProtectRoutes ><Dashboard/></ProtectRoutes>}/>
           <Route path="/new" element={<ProtectRoutes> <New/></ProtectRoutes>}/>
+          <Route path="/post" element={<ProtectRoutes> <EditBlog/></ProtectRoutes>}/>
           <Route path="/profile" element={ <ProtectRoutes> <Profile/></ProtectRoutes>}/>
           <Route path="/change" element={<ProtectRoutes> <ChangePassword/></ProtectRoutes>}/>
         </Routes>

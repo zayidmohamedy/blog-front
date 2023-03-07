@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+ 
 function Signup(){
      const [inputs,setInputs]= useState({})
-     
+     const Navigate= useNavigate();
     function handleOnSubmit(){
         axios.post(`http://localhost:8000/auth/signup`,inputs)
         .then((res)=>{
             toast.success(res.data.message);
-            }).catch((e)=>{ toast.error(e.response.data.message);})
+            Navigate("/login")
+            }).catch((e)=>{ toast.error("Oops we have error!");})
     }
 
     return (

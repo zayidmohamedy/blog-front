@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
  
 
@@ -14,8 +14,9 @@ function New(){
         .then((res)=>{
             // console.log(res.data)
             toast.success(res.data.message);
-        Navigate("/dashboard")
-            }).catch((e)=>{ toast.error(e.response.data.message);})
+  
+            }).catch((e)=>{ toast.error(e.response.data.message);
+                Navigate("/profile")})
     }
     return(
         <div className="m-auto w-1/2 mt-5 p-5 bg-white rounded-md">

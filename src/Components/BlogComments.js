@@ -5,6 +5,8 @@ import { toast } from "react-toastify"
 import { UserContext } from "../Utils/UserContext"
 import Comment from "./Comment"
  
+import jwt_decode from "jwt-decode"; 
+
 function BlogComments(){
     const {id} = useParams()
     const {user}=useContext(UserContext)
@@ -12,15 +14,33 @@ function BlogComments(){
     const [comments,setComments]=useState([])
     const token =  localStorage.getItem("token")
   
-   useEffect(()=>{
-    axios.get('http://localhost:8000/comment/63ee440279d1da15107b554c')
+
+       
+const [image,setImage] = useState({});
+
+
+  if(user){
+    const token = localStorage.getItem("token")
+    const id = jwt_decode(token)
+    axios.get(`http://localhost:8000/auth/user/${id.id}`)
     .then((res)=>{
-          console.log(res);
+     
+     
+      setImage(res.data.user.image.url);
+    
+        }).catch((e)=>{ 
+             console.log(e);
+        })
+  }
+   useEffect(()=>{
+    axios.get(`http://localhost:8000/comment/list/${id}`)
+    .then((res)=>{
+          setComments(res.data.comments);
     }).catch((e)=>{
         console.log(e);
     })
 
-   })
+   },[])
     function handleOnSubmit(){
         axios.post("http://localhost:8000/comment/create",{
             comment:comment,
@@ -44,7 +64,8 @@ function BlogComments(){
             <div className="py-5">
                 <div className="flex space-x-2">
                 <div className="h-12 w-12">               
-                     <img className="rounded-full" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80"/>
+                     <img className="rounded-full" src= {image}
+                                          />
                 </div>
                     <textarea className="border w-full rounded-md p-2" placeholder="Add to the discussion" onChange={(e)=> setComment(e.target.value)}></textarea>
                 </div>
@@ -52,7 +73,7 @@ function BlogComments(){
                     <button className="bg-blue-600 p-2" onClick={handleOnSubmit}>Submit</button>
                 </div>
             </div>  }
-            <Comment/>
+            {comments.map((data)=> <Comment comments={data}/>)}
         </div>
     )
 }

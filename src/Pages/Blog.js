@@ -12,10 +12,11 @@ function Blog(){
   useEffect(()=>{
     axios.get(`http://localhost:8000/blog/list/${id}`)
         .then((res)=>{
+         
             setBlog(res.data.blogs)
             setLoading(false)
             }).catch((e)=>{ console.log(e.response);})
-  },)
+  },[])
   if (loading ) return
     return (
         <div className="flex my-5 space-x-5">
